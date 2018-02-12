@@ -14,6 +14,8 @@ public class FormManager : MonoBehaviour {
 
     public Text connectionState;
 
+    public AuthManager authManager;
+
     private void Awake()
     {
         ToggleButtonState(false);
@@ -21,7 +23,7 @@ public class FormManager : MonoBehaviour {
 
     public void isValidEmail()
     {
-        string email = emailInputField.text.ToString();
+        string email = emailInputField.text;
         var checkPattern = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))"  +
                            @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
 
@@ -38,6 +40,7 @@ public class FormManager : MonoBehaviour {
 
     public void OnSignUp()
     {
+        authManager.SignUpNewUser(emailInputField.text, PasswordInputField.text);
         Debug.Log("Signed Up");
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DatabaseManager : MonoBehaviour {
+public class DatabaseManager : Singleton <DatabaseManager> {
 
 	// Use this for initialization
 	void Start () {

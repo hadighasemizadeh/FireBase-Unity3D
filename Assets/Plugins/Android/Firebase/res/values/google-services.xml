@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://fir-tryonunity3d.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">732758510924</string>
+  <string name="google_storage_bucket" translatable="false">fir-tryonunity3d.appspot.com</string>
+  <string name="project_id" translatable="false">fir-tryonunity3d</string>
+  <string name="google_api_key" translatable="false">AIzaSyDw6LuW89RNGXIKkXbdLL3UwlLCdf_xPAM</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDw6LuW89RNGXIKkXbdLL3UwlLCdf_xPAM</string>
+  <string name="google_app_id" translatable="false">1:732758510924:android:07dc46e018c6254b</string>
+  <string name="default_web_client_id" translatable="false">732758510924-kkq1k3t1e8uhs1gl19aqm1dbjvmto22l.apps.googleusercontent.com</string>
+</resources>
