@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
+using System.Threading.Tasks;
+using Firebase;
+using Firebase.Auth;
+using UnityEngine.SceneManagement;
 
 public class FormManager : MonoBehaviour {
 
@@ -19,6 +23,14 @@ public class FormManager : MonoBehaviour {
     private void Awake()
     {
         ToggleButtonState(false);
+        // Subscribe auth delegates
+        authManager.authCallBackEvent += AuthCallBackHandller;
+    }
+
+    // Clean subscribed methods
+    private void OnDestroy()
+    {
+        authManager.authCallBackEvent -= AuthCallBackHandller;
     }
 
     public void isValidEmail()
@@ -35,6 +47,7 @@ public class FormManager : MonoBehaviour {
 
     public void OnSignIn()
     {
+        authManager.SignInUser(emailInputField.text, PasswordInputField.text);
         Debug.Log("Signed In");
     }
 
@@ -60,5 +73,20 @@ public class FormManager : MonoBehaviour {
     private void DisplayMessage(string msg)
     {
         connectionState.text = msg;
+    }
+
+    IEnumerator AuthCallBackHandller(Task<Firebase.Auth.FirebaseUser> task, string _operation)
+    {
+        if (task.IsCanceled || task.IsFaulted)
+        {
+            DisplayMessage("Error: " + task.Exception);
+        } else if (task.IsCompleted)
+        {
+            Firebase.Auth.FirebaseUser newPlayer = task.Result;
+            DisplayMessage(string.Format("user with {0} address signed up successfully.", newPlayer.Email));
+
+            yield return new WaitForSeconds(2F);
+            SceneManager.LoadScene("PlayerList");
+        }
     }
 }
