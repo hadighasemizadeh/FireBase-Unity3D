@@ -82,8 +82,17 @@ public class FormManager : MonoBehaviour {
             DisplayMessage("Error: " + task.Exception);
         } else if (task.IsCompleted)
         {
-            Firebase.Auth.FirebaseUser newPlayer = task.Result;
-            DisplayMessage(string.Format("user with {0} address signed up successfully.", newPlayer.Email));
+            if (_operation == "sign_up")
+            {
+
+                Firebase.Auth.FirebaseUser newPlayer = task.Result;
+                DisplayMessage(string.Format("user with {0} address signed up successfully.", newPlayer.Email));
+
+                Player mPlayer = new Player(newPlayer.Email, 0, 1);
+                Debug.Log(newPlayer.Email.ToString() + "I am Here!!" + newPlayer.UserId.ToString());
+                DatabaseManager.Instance.CreateNewPlayer(mPlayer, newPlayer.UserId);
+            }
+
 
             yield return new WaitForSeconds(2F);
             SceneManager.LoadScene("PlayerList");
